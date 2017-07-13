@@ -49,6 +49,9 @@ vagrant up
 # SSH into the Vagrant box
 vagrant ssh
 
+# Installs the required dependencies on the machine
+install_dependencies
+
 ```
 On Windows machines you may face issues with long path names on the VM that aren't handled correctly. A work around is to copy the script to another directory (not the one shared between the VM and Windows host), and build there:
 
@@ -186,6 +189,48 @@ iOS  ARM64 builds are available as of 7810.0.0
 
 mac x86_64 builds are available as of 7759.0.0
 
+###Linux x86, x86_64 Builds
+
+The following instructions are for building the native WebRTC libraries for Linux.
+
+
+#### Getting Started
+##### On Linux
+The scripts can probably work on most distros, although we only have experience with Ubuntu 12.04, 14.04, 16.04 and 16.10 on 64 bit machines.
+
+This is only required once.
+```shell
+
+# Source all the routines
+source linux/build.sh
+
+# Install any dependencies needed
+install_dependencies
+
+# Pull WebRTC
+get_webrtc
+
+# Build apprtc
+build_apprtc
+```
+
+You can build for arm-linaro-gnueabihf, x86, x86_64 platform
+
+```shell
+export WEBRTC_ARCH=x86 #, arm-linaro-gnueabihf or x86_64
+prepare_gyp_defines &&
+execute_build
+```
+
+You can build a particular revision
+
+```shell
+# Pull WebRTC
+get_webrtc 6783
+
+# Build apprtc
+build_apprtc
+```
 
 ###### Versioning
 
